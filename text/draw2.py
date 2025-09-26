@@ -154,8 +154,8 @@ if __name__ == '__main__':
         for val_data in tqdm(validate_loader):
             val_images, val_labels = val_data
             outputs = net(val_images.to(device))
-            outputs = torch.softmax(outputs, dim=1)
-            outputs = torch.argmax(outputs, dim=1)
+            outputs = torch.softmax(outputs, dim=1) #算每个类别的概率
+            outputs = torch.argmax(outputs, dim=1) #获取最大值的索引
             confusion.update(outputs.to("cpu").numpy(), val_labels.to("cpu").numpy())
     confusion.plot()
     confusion.summary()
